@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import { PortableText } from '@portabletext/react'
 import { client } from '../sanityClient'
+import { urlFor } from '../image'
 
 interface Post {
     _id: string
@@ -11,6 +12,7 @@ interface Post {
     excerpt: string
     publishedAt: string
     readTime: string
+    mainImage?: any
     body: any[]
 }
 
@@ -28,6 +30,7 @@ export default function BlogPostPage() {
     useEffect(() => {
         const fetchPost = async () => {
             try {
+                // AŽURIRAN GROQ: Eksplicitno dereferenciramo asset unutar slika u body-ju
                 const query = `*[_type == "post" && slug.current == $slug][0] {
           _id,
           title,
@@ -36,7 +39,14 @@ export default function BlogPostPage() {
           excerpt,
           publishedAt,
           readTime,
-          body
+          mainImage,
+          body[]{
+            ...,
+            _type == "image" => {
+              ...,
+              "asset": asset->
+            }
+          }
         }`
 
                 const data = await client.fetch(query, { slug })
@@ -90,7 +100,7 @@ export default function BlogPostPage() {
                 <div className="inline-block px-3 py-1 bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950 text-xs font-bold rounded-full mb-4">
                     {post.category}
                 </div>
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 leading-tight">
+                <h1 className="text-4xl md:text-5xl lg:text-5xl font-black text-white mb-6 leading-tight">
                     {post.title}
                 </h1>
                 <div className="flex items-center gap-4 text-slate-400">
@@ -100,7 +110,18 @@ export default function BlogPostPage() {
                 </div>
             </header>
 
-            {/* Sadržaj članka - PortableText renderuje rich text iz Sanity-ja */}
+            {/* Glavna slika (Cover) */}
+            {post.mainImage && post.mainImage.asset && (
+                <div className="mb-12 rounded-2xl overflow-hidden border border-slate-800 shadow-2xl">
+                    <img
+                        src={urlFor(post.mainImage).width(1200).height(600).fit('crop').url()}
+                        alt={post.title}
+                        className="w-full h-[400px] object-cover"
+                    />
+                </div>
+            )}
+
+            {/* Sadržaj članka */}
             <div className="prose prose-invert max-w-none">
                 <PortableText
                     value={post.body}
@@ -108,7 +129,7 @@ export default function BlogPostPage() {
                         block: {
                             h2: ({children}) => <h2 className="text-2xl md:text-3xl font-bold text-white mt-12 mb-6">{children}</h2>,
                             h3: ({children}) => <h3 className="text-xl md:text-2xl font-bold text-white mt-8 mb-4">{children}</h3>,
-                            normal: ({children}) => <p className="text-slate-300 text-lg leading-relaxed mb-6">{children}</p>,
+                            normal: ({children}) => <p className="text-slate-300 text-lg leading-relaxed mb-6 text-justify">{children}</p>,
                         },
                         list: {
                             bullet: ({children}) => <ul className="list-none space-y-2 my-4">{children}</ul>,
@@ -121,11 +142,34 @@ export default function BlogPostPage() {
                                     <span>{children}</span>
                                 </li>
                             ),
+                            // DODATO: Podrška za numerisane liste
+                            number: ({children}) => (
+                                <li className="text-slate-300 leading-relaxed list-decimal list-inside marker:text-orange-500">
+                                    {children}
+                                </li>
+                            ),
                         },
                         marks: {
                             strong: ({children}) => <strong className="text-white font-semibold">{children}</strong>,
                             em: ({children}) => <em className="text-slate-200">{children}</em>,
                             code: ({children}) => <code className="bg-slate-900 px-2 py-1 rounded text-orange-400 font-mono text-sm">{children}</code>,
+                        },
+                        types: {
+                            // DODATO: Bezbednosna provera da li slika ima asset pre generisanja URL-a
+                            image: ({value}: any) => {
+                                if (!value || !value.asset) {
+                                    return null; // Ne renderuj ništa ako slika nije otpremljena
+                                }
+                                return (
+                                    <div className="my-8 rounded-xl overflow-hidden border border-slate-800">
+                                        <img
+                                            src={urlFor(value).width(800).fit('max').url()}
+                                            alt={value.alt || 'Blog slika'}
+                                            className="w-full h-auto"
+                                        />
+                                    </div>
+                                )
+                            },
                         },
                     }}
                 />

@@ -16,6 +16,47 @@
     "ctaSecondary": "Pogledaj usluge",
     "trustText": "100% bezbedan i optimizovan kod"
   },
+  "services": {
+    "title": "Naše usluge",
+    "subtitle": "Kompletna rešenja za vaš softverski životni ciklus",
+    "devTitle": "Razvoj softvera",
+    "devDesc": "Projektujemo i gradimo skalabilne web i mobilne aplikacije koristeći najnovije tehnologije.",
+    "qaTitle": "QA & Testiranje",
+    "qaDesc": "Sprovodimo rigorozno manualno i automatizovano testiranje za bag-free iskustvo.",
+    "secTitle": "Bezbednosni auditi",
+    "secDesc": "Detektujemo ranjivosti i sprovodimo penetracione testove pre nego što napadači to urade."
+  },
+  "process": {
+    "title": "Kako radimo",
+    "subtitle": "Naš proces je transparentan, efikasan i fokusiran na rezultat",
+    "step1Title": "Analiza i planiranje",
+    "step1Desc": "Razumemo vaše potrebe i definišemo tehničku arhitekturu.",
+    "step2Title": "Razvoj i integracija",
+    "step2Desc": "Pišemo čist kod i integrišemo CI/CD pipeline-ove.",
+    "step3Title": "Testiranje i bezbednost",
+    "step3Desc": "Automatizovani testovi i bezbednosna skeniranja u svakom koraku.",
+    "step4Title": "Deploy i održavanje",
+    "step4Desc": "Lansiramo u produkciju i pružamo kontinuiranu podršku."
+  },
+  "blog": {
+    "title": "Iz našeg bloga",
+    "subtitle": "Tehnički članci, novosti i best practices"
+  },
+  "contact": {
+    "title": "Kontaktirajte nas",
+    "subtitle": "Spremni da unapredimo vaš softver?",
+    "chatTitle": "Hajde da razgovaramo",
+    "chatDesc": "Imate ideju za novi projekat, potrebu za testiranjem ili vam je potreban bezbednosni audit? Naš tim je spreman da vam pomogne.",
+    "emailLabel": "Email",
+    "phoneLabel": "Telefon",
+    "locationLabel": "Lokacija",
+    "nameLabel": "Ime i prezime",
+    "namePlaceholder": "Vaše ime",
+    "emailPlaceholder": "vas@email.com",
+    "messageLabel": "Poruka",
+    "messagePlaceholder": "Opišite vaš projekat...",
+    "submitButton": "Pošalji poruku"
+  },
   "footer": {
     "rights": "Sva prava zadržana."
   },

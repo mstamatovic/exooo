@@ -1,6 +1,8 @@
 import {type JSX, useEffect, useState} from 'react'
 import { Link } from 'react-router-dom'
+import { useTranslation } from 'react-i18next'
 import { client } from '../sanityClient'
+import { urlFor } from '../image' // <--- DODATO ZA SLIKE
 
 interface Post {
     _id: string
@@ -10,9 +12,9 @@ interface Post {
     excerpt: string
     publishedAt: string
     readTime: string
+    mainImage?: any // <--- DODATO
 }
 
-// Helper funkcija koja na osnovu kategorije dodeljuje gradijent i ikonicu
 function getCategoryStyle(category: string) {
     const styles: Record<string, { gradient: string; icon: JSX.Element }> = {
         'Bezbednost': {
@@ -51,7 +53,6 @@ function getCategoryStyle(category: string) {
     return styles[category] || styles['Novosti']
 }
 
-// Helper za formatiranje datuma
 function formatDate(dateString: string) {
     const date = new Date(dateString)
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Maj', 'Jun', 'Jul', 'Avg', 'Sep', 'Okt', 'Nov', 'Dec']
@@ -59,6 +60,7 @@ function formatDate(dateString: string) {
 }
 
 export default function Blog() {
+    const { t } = useTranslation()
     const [posts, setPosts] = useState<Post[]>([])
     const [loading, setLoading] = useState(true)
 
@@ -72,7 +74,8 @@ export default function Blog() {
           category,
           excerpt,
           publishedAt,
-          readTime
+          readTime,
+          mainImage // <--- DODATO DA SE POVUČE SLIKA
         }[0...3]`
 
                 const data = await client.fetch(query)
@@ -100,8 +103,8 @@ export default function Blog() {
     return (
         <section id="blog" className="relative z-10 max-w-7xl mx-auto px-6 py-20">
             <div className="text-center mb-16">
-                <h2 className="text-4xl md:text-5xl font-bold mb-4">Iz našeg bloga</h2>
-                <p className="text-xl text-slate-400">Tehnički članci, novosti i best practices</p>
+                <h2 className="text-4xl md:text-5xl font-bold mb-4">{t('blog.title')}</h2>
+                <p className="text-xl text-slate-400">{t('blog.subtitle')}</p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -113,12 +116,24 @@ export default function Blog() {
                             key={post._id}
                             className="group bg-slate-900/50 border border-slate-800 rounded-2xl overflow-hidden hover:border-orange-500/30 transition-all duration-300 hover:-translate-y-2 flex flex-col"
                         >
-                            {/* Cover deo kartice */}
-                            <div className={`h-48 bg-gradient-to-br ${style.gradient} flex items-center justify-center relative overflow-hidden`}>
-                                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
-                                <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
-                                    {style.icon}
-                                </div>
+                            {/* Cover deo kartice: Slika ILI Gradijent */}
+                            <div className="h-48 relative overflow-hidden">
+                                {post.mainImage ? (
+                                    <img
+                                        src={urlFor(post.mainImage).width(600).height(300).fit('crop').url()}
+                                        alt={post.title}
+                                        className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                                    />
+                                ) : (
+                                    <div className={`w-full h-full bg-gradient-to-br ${style.gradient} flex items-center justify-center relative`}>
+                                        <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+                                        <div className="relative z-10 transform group-hover:scale-110 transition-transform duration-500">
+                                            {style.icon}
+                                        </div>
+                                    </div>
+                                )}
+
+                                {/* Kategorija badge (uvek vidljiv) */}
                                 <div className="absolute top-4 left-4 bg-slate-950/80 backdrop-blur-sm text-orange-400 text-xs font-bold px-3 py-1 rounded-full border border-orange-500/20">
                                     {post.category}
                                 </div>
@@ -138,7 +153,7 @@ export default function Blog() {
                                         {formatDate(post.publishedAt)} • {post.readTime}
                                     </div>
                                     <div className="text-orange-400 text-sm font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                                        Čitaj više
+                                        {t('common.readMore')}
                                         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                                     </div>
                                 </div>

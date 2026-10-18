@@ -16,6 +16,47 @@
     "ctaSecondary": "View Services",
     "trustText": "100% secure and optimized code"
   },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Complete solutions for your software lifecycle",
+    "devTitle": "Software Development",
+    "devDesc": "We design and build scalable web and mobile apps using the latest technologies.",
+    "qaTitle": "QA & Testing",
+    "qaDesc": "We conduct rigorous manual and automated testing for a bug-free experience.",
+    "secTitle": "Security Audits",
+    "secDesc": "We detect vulnerabilities and perform penetration tests before attackers do."
+  },
+  "process": {
+    "title": "How We Work",
+    "subtitle": "Our process is transparent, efficient, and result-oriented",
+    "step1Title": "Analysis & Planning",
+    "step1Desc": "We understand your needs and define the technical architecture.",
+    "step2Title": "Development & Integration",
+    "step2Desc": "We write clean code and integrate CI/CD pipelines.",
+    "step3Title": "Testing & Security",
+    "step3Desc": "Automated tests and security scans at every step.",
+    "step4Title": "Deploy & Maintenance",
+    "step4Desc": "We launch to production and provide continuous support."
+  },
+  "blog": {
+    "title": "From Our Blog",
+    "subtitle": "Tech articles, news, and best practices"
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Ready to upgrade your software?",
+    "chatTitle": "Let's talk",
+    "chatDesc": "Have an idea for a new project, need testing, or require a security audit? Our team is ready to help.",
+    "emailLabel": "Email",
+    "phoneLabel": "Phone",
+    "locationLabel": "Location",
+    "nameLabel": "Full name",
+    "namePlaceholder": "Your name",
+    "emailPlaceholder": "your@email.com",
+    "messageLabel": "Message",
+    "messagePlaceholder": "Describe your project...",
+    "submitButton": "Send message"
+  },
   "footer": {
     "rights": "All rights reserved."
   },
