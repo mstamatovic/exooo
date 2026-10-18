@@ -41,7 +41,7 @@ export default function Navbar() {
                         }}
                         className="text-2xl font-bold gradient-text cursor-pointer hover:opacity-80 transition-opacity"
                     >
-                        exooo
+                        eXooo
                     </a>
 
                     {/* Desktop Meni */}

@@ -17,13 +17,13 @@ export default function Footer() {
                         }}
                         className="text-2xl font-bold gradient-text cursor-pointer hover:opacity-80 transition-opacity"
                     >
-                        exooo
+                        eXooo
                     </a>
 
                     {/* Linkovi */}
                     <div className="flex gap-6">
-                        <a href="https://github.com/tvoj-profil" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">GitHub</a>
-                        <a href="https://linkedin.com/in/tvoj-profil" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">LinkedIn</a>
+                        <a href="https://github.com/mstamatovic" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">GitHub</a>
+                        <a href="https://www.linkedin.com/in/milosstamatovic" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">LinkedIn</a>
                     </div>
 
                     {/* Copyright */}
