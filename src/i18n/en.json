@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "services": "Services",
+    "process": "Process",
+    "blog": "Blog",
+    "contact": "Contact",
+    "cta": "Book a Consultation"
+  },
+  "hero": {
+    "badge": "Next-Generation Software Engineering",
+    "title1": "Next-Gen Engineering.",
+    "title2": "We build, we test",
+    "title3": "and we protect your digital world.",
+    "description": "We build scalable systems, conduct rigorous QA testing, and perform the strictest security audits. Your code is in the safest hands.",
+    "ctaPrimary": "Book a Consultation",
+    "ctaSecondary": "View Services",
+    "trustText": "100% secure and optimized code"
+  },
+  "footer": {
+    "rights": "All rights reserved."
+  },
+  "common": {
+    "backToTop": "Back to top",
+    "readMore": "Read more",
+    "minRead": "min read"
+  }
+}

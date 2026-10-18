@@ -49,7 +49,7 @@ export const blogPosts: BlogPost[] = [
             "```dockerfile\nRUN addgroup -S appgroup && adduser -S appuser -G appgroup\nUSER appuser\n```",
             "## 3. Skenirajte slike u CI/CD pipeline-u",
             "Integrišite `trivy` ili `grype` u vaš GitHub Actions workflow. Ovo automatski skenira sve dependency-je za poznate CVE ranjivosti pre deploy-a:",
-            "```yaml\n- name: Scan image\n  uses: aquasecurity/trivy-action@master\n  with:\n    image-ref: 'exooo-api:latest'\n    severity: 'CRITICAL,HIGH'\n```",
+            "```yaml\n- name: Scan image\n  uses: aquasecurity/trivy-action@master\n  with:\n    image-ref: 'exooo-cms-api:latest'\n    severity: 'CRITICAL,HIGH'\n```",
             "## 4. Tajne držite van slika",
             "Nikada ne hardkodujte lozinke u Dockerfile. Koristite Docker secrets, environment varijable iz vault-a (HashiCorp Vault, AWS Secrets Manager), ili `.env` fajlove koji su u `.gitignore`.",
             "## Zaključak",

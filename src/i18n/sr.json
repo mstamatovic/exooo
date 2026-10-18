@@ -1,0 +1,27 @@
+{
+  "nav": {
+    "services": "Usluge",
+    "process": "Proces",
+    "blog": "Blog",
+    "contact": "Kontakt",
+    "cta": "Zakaži konsultacije"
+  },
+  "hero": {
+    "badge": "Softverski inženjering nove generacije",
+    "title1": "Inženjering nove generacije.",
+    "title2": "Gradimo, testiramo",
+    "title3": "i štitimo vaš digitalni svet.",
+    "description": "Gradimo skalabilne sisteme, sprovodimo rigorozno QA testiranje i vršimo najstrožije bezbednosne audite. Vaš kod je u najsigurnijim rukama.",
+    "ctaPrimary": "Zakaži konsultacije",
+    "ctaSecondary": "Pogledaj usluge",
+    "trustText": "100% bezbedan i optimizovan kod"
+  },
+  "footer": {
+    "rights": "Sva prava zadržana."
+  },
+  "common": {
+    "backToTop": "Nazad na vrh",
+    "readMore": "Čitaj više",
+    "minRead": "min čitanja"
+  }
+}
