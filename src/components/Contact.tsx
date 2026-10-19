@@ -55,7 +55,7 @@ export default function Contact() {
                             </div>
                             <div>
                                 <h4 className="text-white font-semibold">{t('contact.emailLabel')}</h4>
-                                <p className="text-slate-400">milos@stamatovic.rs</p>
+                                <p className="text-slate-400">info@exooo.com</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
