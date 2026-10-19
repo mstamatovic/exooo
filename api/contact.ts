@@ -23,7 +23,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             body: JSON.stringify({
                 sender: {
                     name: "Exooo Website",
-                    email: "info@exooo.rs", // Možeš staviti bilo koji validan format, npr. svoj gmail
+                    email: "milosstamatovic@yahoo.com", // Možeš staviti bilo koji validan format, npr. svoj gmail
                 },
                 to: [
                     {
