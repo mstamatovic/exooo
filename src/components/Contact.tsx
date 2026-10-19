@@ -4,12 +4,34 @@ import { useTranslation } from 'react-i18next'
 export default function Contact() {
     const { t } = useTranslation()
     const [formData, setFormData] = useState({ name: '', email: '', message: '' })
+    const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
-        // Ovde će kasnije ići prava logika za slanje (npr. EmailJS ili backend)
-        alert(t('contact.submitButton') + ' - OK!')
-        setFormData({ name: '', email: '', message: '' })
+        setStatus('loading')
+
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData),
+            })
+
+            const data = await response.json()
+
+            if (response.ok) {
+                setStatus('success')
+                setFormData({ name: '', email: '', message: '' })
+            } else {
+                setStatus('error')
+                console.error('Greška:', data.message)
+            }
+        } catch (error) {
+            setStatus('error')
+            console.error('Mrežna greška:', error)
+        }
     }
 
     return (
@@ -33,7 +55,7 @@ export default function Contact() {
                             </div>
                             <div>
                                 <h4 className="text-white font-semibold">{t('contact.emailLabel')}</h4>
-                                <p className="text-slate-400">info@exooo.com</p>
+                                <p className="text-slate-400">milos@stamatovic.rs</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
@@ -93,9 +115,21 @@ export default function Contact() {
                                 placeholder={t('contact.messagePlaceholder')}
                             ></textarea>
                         </div>
-                        <button type="submit" className="w-full bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950 font-bold py-3 rounded-lg hover:shadow-lg hover:shadow-orange-500/50 transition-all transform hover:scale-[1.02]">
-                            {t('contact.submitButton')}
+
+                        <button
+                            type="submit"
+                            disabled={status === 'loading'}
+                            className="w-full bg-gradient-to-r from-orange-500 to-amber-400 text-slate-950 font-bold py-3 rounded-lg hover:shadow-lg hover:shadow-orange-500/50 transition-all transform hover:scale-[1.02] disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            {status === 'loading' ? 'Slanje...' : t('contact.submitButton')}
                         </button>
+
+                        {status === 'success' && (
+                            <p className="text-green-400 text-center text-sm mt-2">Hvala! Vaša poruka je uspešno poslata.</p>
+                        )}
+                        {status === 'error' && (
+                            <p className="text-red-400 text-center text-sm mt-2">Došlo je do greške. Pokušajte ponovo ili nas kontaktirajte direktno email-om.</p>
+                        )}
                     </form>
                 </div>
             </div>
