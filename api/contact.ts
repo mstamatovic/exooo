@@ -1,7 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
-    // Dozvoli samo POST zahteve
     if (req.method !== 'POST') {
         return res.status(405).json({ message: 'Method not allowed' });
     }
@@ -23,11 +22,16 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
             body: JSON.stringify({
                 sender: {
                     name: "Exooo Website",
-                    email: "milosstamatovic@yahoo.com", // Možeš staviti bilo koji validan format, npr. svoj gmail
+                    email: "milosstamatovic@yahoo.com", // Tvoj verifikovani Gmail kao pošiljalac
+                },
+                // 🌟 NOVO: Ovo govori Gmail-u kome da odgovori kada klikneš "Reply"
+                replyTo: {
+                    email: email,
+                    name: name,
                 },
                 to: [
                     {
-                        email: "milosstamatovic984@gmail.com", // <--- TVOJ EMAIL NA KOJI STIŽU PORUKE
+                        email: "milosstamatovic984@gmail.com", // Gde tebi stiže obaveštenje
                         name: "Milos Stamatovic",
                     },
                 ],
